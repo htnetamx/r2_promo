@@ -1,7 +1,7 @@
 {
-  "name": "r2_product",
+  "name": "r2_promo",
   "version": "0.0.1",
-  "description": "Release 2.0 - Product Microservice",
+  "description": "Release 2.0 - Promo Microservice",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && babel-node ./build/src/index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/htnetamx/r2_product.git"
+    "url": "git+https://github.com/htnetamx/r2_promo.git"
   },
   "keywords": [],
   "author": "Hugo y Andrés de Neta MX",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/htnetamx/r2_product/issues"
+    "url": "https://github.com/htnetamx/r2_promo/issues"
   },
-  "homepage": "https://github.com/htnetamx/r2_product#readme",
+  "homepage": "https://github.com/htnetamx/r2_promo#readme",
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.2",
