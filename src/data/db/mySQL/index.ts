@@ -31,7 +31,7 @@ export class RepositoryMySQL implements IProductRepository {
     try {
       if (Connection.mySQL2Pool == null) return null;
       let [results, fields] = await Connection.mySQL2Pool.query({
-        sql: "SELECT * from netamx.Product where id=" + id + ";",
+        sql: "SELECT * from neta.Product where id=" + id + ";",
       });
       let data = Object.values(JSON.parse(JSON.stringify(results)));
       let entity = new ProductMapperMySQL().mapFrom(data[0] as any);
