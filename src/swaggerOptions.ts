@@ -8,9 +8,9 @@ export const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title:'Promo Microservice API',
+            title:'Product Microservice API',
             version: '1.0.0',
-            description: 'Release 2.0 - Promo Microservice'
+            description: 'Release 2.0 - Product Microservice'
         },
         servers: [
             {

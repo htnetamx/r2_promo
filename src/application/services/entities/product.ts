@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { User, ProductBaseModel } from "../../../data/entities";
+import { Product, ProductBaseModel } from "../../../data/entities";
 import { IProductRepository } from "../../contracts";
 import { RepositoryMongoDB } from "../../../data/db/mongoDB";
 import { RepositoryMySQL } from "../../../data/db/mySQL";
@@ -82,6 +82,43 @@ export class ProductService {
               )
         );
         console.log("r_promoesis: ", result_promises);
+        return errores.length > 0 ? null : result_promises[0];
+      } else {
+        return null;
+      }
+    } catch (error) {
+      //console.log(error);
+      return null;
+    }
+  }
+
+
+
+  async getAllProduct(numPerPage: any, page: any){
+    try {
+      var promises: Array<Promise<Array<ProductBaseModel | null> | null>> = [];
+      const entries = Object.entries(this.repos);
+
+      entries.forEach((entry) =>
+        promises.push((<IProductRepository>entry[1]).getAllProduct(numPerPage, page))
+      );
+      let result_promises = await Promise.all(promises);
+      if (result_promises.length > 0) {
+        result_promises = result_promises.filter((i) => i !== null);
+
+        var succeses: Array<
+          IServiceResponse<Array<ProductBaseModel | null> | null>
+        > = [];
+        var errores: Array<IServiceResponse<null>> = [];
+        result_promises.forEach((result, index) =>
+          result == null
+            ? errores.push(
+                new ServiceResponse(result, entries[index][0], index)
+              )
+            : succeses.push(
+                new ServiceResponse(result, entries[index][0], index)
+              )
+        );
         return errores.length > 0 ? null : result_promises[0];
       } else {
         return null;

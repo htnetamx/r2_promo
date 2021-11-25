@@ -1,26 +1,46 @@
 import { ProductInputModel } from "../../application/domain";
 
 export interface ProductBaseModel {
-  Id: string;
-  Name: string;
-  Sku: string;
-  CreatedOnUtc: Date;
-  UpdatedOnUtc: Date;
+  id: string;
+  name: string;
+  sku: string;
+  createdOnUtc: Date;
+  updatedOnUtc: Date;
+  seoFilename: string;
+  price: number;
+  oldPrice: number;
+  costPrice: number;
+  orderMinimumQuantity: number;
+  orderMaximumQuantity: number;
 }
 
-export class User implements ProductBaseModel {
-  public Id: string;
-  public Name: string;
-  public Sku: string;
+export class Product implements ProductBaseModel {
+  public id: string;
+  public name: string;
+  public sku: string;
 
-  public CreatedOnUtc: Date;
-  public UpdatedOnUtc: Date;
+  public createdOnUtc: Date;
+  public updatedOnUtc: Date;
+
+  public seoFilename: string;
+
+  public price: number;
+  public oldPrice: number;
+  public costPrice: number;
+  public orderMinimumQuantity: number;
+  public orderMaximumQuantity: number;
 
   constructor(data: ProductInputModel) {
-      this.Id = data.Id;
-      this.Name = data.Name;
-      this.Sku = data.Sku;
-      this.CreatedOnUtc = data.CreatedOnUtc;
-      this.UpdatedOnUtc = data.UpdatedOnUtc;
+    this.id = data.Id;
+    this.name = data.Name;
+    this.sku = data.Sku;
+    this.createdOnUtc = data.CreatedOnUtc;
+    this.updatedOnUtc = data.UpdatedOnUtc;
+    this.seoFilename = data.SeoFilename;
+    this.price = data.Price;
+    this.oldPrice = data.OldPrice;
+    this.costPrice = data.CostPrice;
+    this.orderMinimumQuantity = data.OrderMinimumQuantity;
+    this.orderMaximumQuantity = data.OrderMaximumQuantity;
   }
 }

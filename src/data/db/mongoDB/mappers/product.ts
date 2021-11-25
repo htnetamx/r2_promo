@@ -8,11 +8,17 @@ export class ProductMapperMongoDB extends Mapper<
 > {
   mapFrom(param: ProductMongoDB): ProductBaseModel {
     return {
-      Id: "",
-      Name: "",
-      Sku: "",
-      CreatedOnUtc: new Date(),
-      UpdatedOnUtc: new Date(),
+      id: "",
+      name: "",
+      sku: "",
+      createdOnUtc: new Date(),
+      updatedOnUtc: new Date(),
+      seoFilename: "",
+      price: 0,
+      oldPrice: 0,
+      costPrice: 0,
+      orderMinimumQuantity: 0,
+      orderMaximumQuantity: 0,
     };
   }
   mapTo(param: ProductBaseModel): ProductMongoDB {

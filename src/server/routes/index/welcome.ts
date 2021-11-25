@@ -17,7 +17,7 @@ export class IndexRoute {
     };
 
     public configureEndPoints(baseUrl: string) {
-        /**
+                /**
          * @swagger
          * /:
          *  get:
