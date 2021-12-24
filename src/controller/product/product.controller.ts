@@ -18,9 +18,9 @@ export class ProductController {
     return data;
   }
 
-  async getAllProduct(numPerPage: any, page:any): Promise<Array<ProductBaseModel | null> | null> {
+  async getAllProduct(id: any, numPerPage: any, page:any): Promise<Array<ProductBaseModel | null> | null> {
     const useCase = new getAllUseCase();
-    const data = useCase.execute2(numPerPage, page);
+    const data = useCase.execute2(id, numPerPage, page);
     console.log(data);
     return data;
   }

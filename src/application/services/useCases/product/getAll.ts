@@ -20,10 +20,8 @@ export class getAllUseCase
     return result;
   }
 
-  public async execute2(
-    numPerPage: any, page:any
-  ){
-    const result = await this._ProductService.getAllProduct(numPerPage, page);
+  public async execute2(id: any, numPerPage: any, page: any) {
+    const result = await this._ProductService.getAllProduct(id, numPerPage, page);
     return result;
   }
 }

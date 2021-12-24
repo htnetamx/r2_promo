@@ -1,20 +1,20 @@
 import { Express, Request, Response, NextFunction } from "express";
-import { PromoController } from "../../../controller";
-export class getAllRoute {
+import { ProductController } from "../../../controller/product";
+
+export class getProductsByPromoIdRoute {
   private server: Express;
 
   constructor(server: Express) {
     this.server = server;
   }
 
-  public getAll = async (req: Request, res: Response, next: NextFunction) => {
+  public getAllProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      var { query } = req;
-      const numPerPage = req.query.npp || 10;
-      const page = req.query.page || 0;
-      const result = await new PromoController().getAllPromo(numPerPage, page);
+      const result = await new ProductController().getAllProduct(req.params.id, 10, 10);
+      console.log("Result");
+      console.log(result);
       res.status(200).send(result);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   public configureEndPoints(baseUrl: string) {
@@ -46,6 +46,23 @@ export class getAllRoute {
      *        Sku: 1
      *        CreatedOnUtc: 2021-07-22T23:10:59.000Z
      *        UpdatedOnUtc: 2021-10-19T19:18:59.000Z
+     *    ProductNotFound:
+     *      type: object
+     *      properties:
+     *        msg:
+     *          type: string
+     *          description: A message for the not found product
+     *      example:
+     *        msg: Product was not found
+     *
+     *  parameters:
+     *    productoId:
+     *      in: path
+     *      name: id
+     *      required: true
+     *      schema:
+     *        type: string
+     *      description: The unique identifier of the product
      */
     /**
      * @swagger
@@ -55,22 +72,26 @@ export class getAllRoute {
      */
     /**
      * @swagger
-     * /product/:
+     * /product/{id}:
      *  get:
-     *    summary: Returns a list of products
+     *    summary: Get a product by Id
      *    tags: [Product]
+     *    parameters:
+     *      - $ref: '#/components/parameters/productoId'
      *    responses:
      *      200:
-     *        description: The list of products
+     *        description: The Found Product
      *        content:
      *          application/json:
      *            schema:
-     *              type: array
-     *              items:
-     *                $ref: '#/components/schemas/ProductBaseModel'
-     *      500:
-     *        description: Some server error
+     *            $ref: '#/components/schemas/ProductBaseModel'
+     *      404:
+     *        description: the product was not found
+     *        content:
+     *          application/json:
+     *            schema:
+     *              $ref: '#/components/schemas/ProductNotFound'
      */
-    this.server.get(`${baseUrl}promo/`, this.getAll);
+    this.server.get(`${baseUrl}promo/:id/product`, this.getAllProduct);
   }
 }

@@ -1,9 +1,9 @@
 import bcrypt from "bcryptjs";
-import { Product, ProductBaseModel } from "../../../data/entities";
-import { IProductRepository } from "../../contracts";
-import { RepositoryMongoDB } from "../../../data/db/mongoDB";
-import { RepositoryMySQL } from "../../../data/db/mySQL";
-import { Credential, ProductInputModel } from "../../domain";
+import { Promo, PromoBaseModel } from "../../../data/entities";
+import { IPromoRepository } from "../../contracts";
+import { PromoRepositoryMongoDB, RepositoryMongoDB } from "../../../data/db/mongoDB";
+import { PromoRepositoryMySQL } from "../../../data/db/mySQL";
+import { Credential, PromoInputModel } from "../../domain";
 import {
   ServiceResponse,
   IServiceResponse,
@@ -11,32 +11,32 @@ import {
   IGroupedService,
 } from "../../base";
 
-export interface IProductService {
-  mongoDB: IProductRepository;
-  mySQL: IProductRepository;
+export interface IPromoService {
+  mongoDB: IPromoRepository;
+  mySQL: IPromoRepository;
 }
 
-export class ProductService {
-  public repos: IProductService = {
-    mongoDB: new RepositoryMongoDB(),
-    mySQL: new RepositoryMySQL(),
+export class PromoService {
+  public repos: IPromoService = {
+    mongoDB: new PromoRepositoryMongoDB(),
+    mySQL: new PromoRepositoryMySQL(),
   };
 
   //Conjunto de servicios bases de datos
-  async getAll(): Promise<Array<ProductBaseModel | null> | null> {
+  async getAll(): Promise<Array<PromoBaseModel | null> | null> {
     try {
-      var promises: Array<Promise<Array<ProductBaseModel | null> | null>> = [];
+      var promises: Array<Promise<Array<PromoBaseModel | null> | null>> = [];
       const entries = Object.entries(this.repos);
 
       entries.forEach((entry) =>
-        promises.push((<IProductRepository>entry[1]).getAll())
+        promises.push((<IPromoRepository>entry[1]).getAll())
       );
       let result_promises = await Promise.all(promises);
       if (result_promises.length > 0) {
         result_promises = result_promises.filter((i) => i !== null);
 
         var succeses: Array<
-          IServiceResponse<Array<ProductBaseModel | null> | null>
+          IServiceResponse<Array<PromoBaseModel | null> | null>
         > = [];
         var errores: Array<IServiceResponse<null>> = [];
         result_promises.forEach((result, index) =>
@@ -58,19 +58,19 @@ export class ProductService {
     }
   }
 
-  async getById(id: Number): Promise<ProductBaseModel | null> {
+  async getById(id: Number): Promise<PromoBaseModel | null> {
     try {
-      var promises: Array<Promise<ProductBaseModel | null>> = [];
+      var promises: Array<Promise<PromoBaseModel | null>> = [];
       const entries = Object.entries(this.repos);
 
       entries.forEach((entry) =>
-        promises.push((<IProductRepository>entry[1]).getById(id))
+        promises.push((<IPromoRepository>entry[1]).getById(id))
       );
       let result_promises = await Promise.all(promises);
 
       if (result_promises.length > 0) {
         result_promises = result_promises.filter((i) => i !== null);
-        var succeses: Array<IServiceResponse<ProductBaseModel | null>> = [];
+        var succeses: Array<IServiceResponse<PromoBaseModel | null>> = [];
         var errores: Array<IServiceResponse<null>> = [];
         result_promises.forEach((result, index) =>
           result == null
@@ -92,22 +92,22 @@ export class ProductService {
     }
   }
 
-  async getAllProduct(id: any, numPerPage: any, page: any) {
+
+
+  async getAllPromo(numPerPage: any, page: any){
     try {
-      var promises: Array<Promise<Array<ProductBaseModel | null> | null>> = [];
+      var promises: Array<Promise<Array<PromoBaseModel | null> | null>> = [];
       const entries = Object.entries(this.repos);
 
       entries.forEach((entry) =>
-        promises.push(
-          (<IProductRepository>entry[1]).getAllProduct(id, numPerPage, page)
-        )
+        promises.push((<IPromoRepository>entry[1]).getAllPromo(numPerPage, page))
       );
       let result_promises = await Promise.all(promises);
       if (result_promises.length > 0) {
         result_promises = result_promises.filter((i) => i !== null);
 
         var succeses: Array<
-          IServiceResponse<Array<ProductBaseModel | null> | null>
+          IServiceResponse<Array<PromoBaseModel | null> | null>
         > = [];
         var errores: Array<IServiceResponse<null>> = [];
         result_promises.forEach((result, index) =>

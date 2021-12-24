@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RepositoryMongoDB = void 0;
+exports.PromoRepositoryMongoDB = exports.RepositoryMongoDB = void 0;
 const mappers_1 = require("./mappers");
 class RepositoryMongoDB {
     constructor() {
@@ -48,3 +48,40 @@ class RepositoryMongoDB {
 }
 exports.RepositoryMongoDB = RepositoryMongoDB;
 RepositoryMongoDB.instance = new RepositoryMongoDB();
+class PromoRepositoryMongoDB {
+    constructor() {
+        this.userMapper = new mappers_1.PromoMapperMongoDB();
+    }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return null;
+            }
+            catch (error) {
+                return null;
+            }
+        });
+    }
+    getById(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return null;
+            }
+            catch (error) {
+                return null;
+            }
+        });
+    }
+    getAllPromo(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return null;
+            }
+            catch (error) {
+                return null;
+            }
+        });
+    }
+}
+exports.PromoRepositoryMongoDB = PromoRepositoryMongoDB;
+PromoRepositoryMongoDB.instance = new RepositoryMongoDB();
